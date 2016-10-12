@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'core',
     'api',
+    'booty',
 )
 
 MIDDLEWARE_CLASSES = (
