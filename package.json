@@ -1,14 +1,14 @@
 {
-  "name": "",
+  "name": "Grocery-REST",
   "version": "1.0.0",
-  "description": "",
-  "repository": "",
+  "description": "All the codes - an angular + REST api + grocery list app",
+  "repository": "groceryList-djangoREST",
   "scripts": {
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint"
   },
-  "author": "",
+  "author": "billbunkum",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.17.0",

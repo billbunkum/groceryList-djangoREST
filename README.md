@@ -1,7 +1,7 @@
 # DJANGO SEED
 
-Starting point for Django, Django Rest Framework, Angular, Webpack and Gulp projects.
+##Grocery List using REST + Angular
+.new project
 
-See the using-django-seed.md in the docs for usage.
-
-**Replace the contents of this doc with a README for your project**
+1. get api working
+2. add angular
