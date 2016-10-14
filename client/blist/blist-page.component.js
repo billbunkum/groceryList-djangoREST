@@ -6,6 +6,7 @@ import blistPageController from './blist-page.controller';
 
 const blistPageComponent = {
     template: template,
+
     controller: blistPageController,
     controllerAs: 'blistPageCtrl',
 };

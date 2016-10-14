@@ -66,7 +66,7 @@
 	
 	var _blist2 = _interopRequireDefault(_blist);
 	
-	var _app = __webpack_require__(13);
+	var _app = __webpack_require__(14);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -31883,11 +31883,16 @@
 	
 	var _blistItem2 = _interopRequireDefault(_blistItem);
 	
+	var _blistApi = __webpack_require__(13);
+	
+	var _blistApi2 = _interopRequireDefault(_blistApi);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var BlistModule = _angular2.default.module('blist', ['ngResource']).config(function ($resourceProvider) {
 	    $resourceProvider.defaults.stripTrailingSlashes = false;
-	}).component('blistPage', _blistPage2.default).component('blistItem', _blistItem2.default);
+	}).factory('blistAPIService', _blistApi2.default).component('blistPage', _blistPage2.default) //t'blistPage becomes blist-page
+	.component('blistItem', _blistItem2.default);
 	
 	exports.default = BlistModule;
 
@@ -32790,6 +32795,7 @@
 	
 	var blistPageComponent = {
 	    template: _blistPage2.default,
+	
 	    controller: _blistPage4.default,
 	    controllerAs: 'blistPageCtrl'
 	};
@@ -32802,7 +32808,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h2>Grocery List</h2>\n            <p class=\"lead\">\n                Wuddya want from the store?\n            </p>\n        </div>\n        <div class=\"col-md-4\">\n            <blist-item />\n        </div>\n    </div>\n</div>"
+	module.exports = "<div class=\"container\">\n    <div class=\"jumbotron\">\n        <h2>Grocery List</h2>\n        <p class=\"lead\">\n            Wuddya want from the store?\n        </p>\n    </div>\n\n    <blist-item \n        ng-repeat=\"bitem in blistPageCtrl.bitems\"\n        bitem=\"bitem\"\n    />\n</div>"
 
 /***/ },
 /* 9 */
@@ -32814,8 +32820,17 @@
 	    value: true
 	});
 	
-	function blistPageController() {
+	function blistPageController(blistAPIService, $interval) {
 	    var ctrl = this;
+	
+	    function getBitems() {
+	        blistAPIService.bitems.get().$promise.then(function (data) {
+	            ctrl.bitems = data.results;
+	            //getting ctrl.bitems
+	        });
+	    }
+	    getBitems();
+	    // $interval(getBitems, 2000);
 	}
 	
 	exports.default = blistPageController;
@@ -32842,6 +32857,10 @@
 	
 	var blistItemComponent = {
 	    template: _blistItem2.default,
+	    bindings: {
+	        bitem: '<'
+	    },
+	
 	    controller: _blistItem4.default,
 	    controllerAs: 'blistItemCtrl'
 	};
@@ -32852,7 +32871,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        YO.\n    </div>\n</div>\n"
+	module.exports = "<!-- <div class=\"panel panel-default\">\n    <div class=\"panel-body\">\n        <p class=\"lead\">\n -->            {{ blistItemCtrl.bitem.item_name }}\n<!--         </p>\n    </div>\n    <div class=\"panel-footer clearfix\">\n -->        <div class=\"pull-right\">\n            {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n        </div>\n        <button class=\"btn btn-default\"></button>\n<!--     </div>\n</div> -->"
 
 /***/ },
 /* 12 */
@@ -32872,6 +32891,25 @@
 
 /***/ },
 /* 13 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	function blistAPIService($resource) {
+	    var api = {
+	        bitems: $resource('/api/groceryList/')
+	    };
+	
+	    return api;
+	}
+	
+	exports.default = blistAPIService;
+
+/***/ },
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32880,11 +32918,11 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(14);
+	var _app = __webpack_require__(15);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(15);
+	var _app3 = __webpack_require__(16);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -32899,13 +32937,13 @@
 	exports.default = appComponent;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-down\"></i>\n                    GroceryList\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4\">\n\n            <blist-page />\n<!-- name fo the file sans ext .html -->\n\n        </div>\n    </div>\n</div> <!-- END container -->"
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	"use strict";

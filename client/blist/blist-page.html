@@ -1,13 +1,13 @@
-<div class="row">
-    <div class="col-md-4">
-        <div class="jumbotron">
-            <h2>Grocery List</h2>
-            <p class="lead">
-                Wuddya want from the store?
-            </p>
-        </div>
-        <div class="col-md-4">
-            <blist-item />
-        </div>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Grocery List</h2>
+        <p class="lead">
+            Wuddya want from the store?
+        </p>
     </div>
+
+    <blist-item 
+        ng-repeat="bitem in blistPageCtrl.bitems"
+        bitem="bitem"
+    />
 </div>

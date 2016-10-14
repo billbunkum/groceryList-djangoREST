@@ -7,12 +7,17 @@ class GroceryList(models.Model):
 
     class Meta:
         ordering = ('-date_added', )
+
     def __str__(self):
         self.item_name = item_name
 
+
+#logic here is wrong somehow
     def total_price(self):
         total_price = 0
-        for i in self.item_price:
-            total_price += i
+        groceryItems = GroceryList.objects.all()
+
+        for item in groceryItems:
+            total_price += item.item_price
 
         return total_price
