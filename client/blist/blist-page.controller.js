@@ -1,3 +1,4 @@
+
 function blistPageController() {
     const ctrl = this;
 

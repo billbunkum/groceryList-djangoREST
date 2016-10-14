@@ -32798,7 +32798,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h2>Grocery List</h2>\n            <p class=\"lead\">\n                Wuddya want from the store?\n            </p>\n        </div>\n    </div>\n</div>"
+	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h2>Grocery List</h2>\n            <p class=\"lead\">\n                Wuddya want from the store?\n            </p>\n        </div>\n        <div class=\"col-md-4\">\n            <blist-item />\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
@@ -32809,6 +32809,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
 	function blistPageController() {
 	    var ctrl = this;
 	}
@@ -32847,7 +32848,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-down\"></i> GroceryList\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4\">\n\n            <blist-page />\n<!-- where do i define this tag? -->\n\n        </div>\n    </div>\n</div> <!-- END container -->"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-down\"></i>\n                    GroceryList\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4\">\n\n            <blist-page />\n<!-- name fo the file sans ext .html -->\n\n        </div>\n    </div>\n</div> <!-- END container -->"
 
 /***/ },
 /* 12 */
