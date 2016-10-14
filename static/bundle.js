@@ -66,7 +66,7 @@
 	
 	var _blist2 = _interopRequireDefault(_blist);
 	
-	var _app = __webpack_require__(10);
+	var _app = __webpack_require__(13);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -31879,11 +31879,15 @@
 	
 	var _blistPage2 = _interopRequireDefault(_blistPage);
 	
+	var _blistItem = __webpack_require__(10);
+	
+	var _blistItem2 = _interopRequireDefault(_blistItem);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var BlistModule = _angular2.default.module('blist', ['ngResource']).config(function ($resourceProvider) {
 	    $resourceProvider.defaults.stripTrailingSlashes = false;
-	}).component('blistPage', _blistPage2.default);
+	}).component('blistPage', _blistPage2.default).component('blistItem', _blistItem2.default);
 	
 	exports.default = BlistModule;
 
@@ -32826,11 +32830,61 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(11);
+	var _blistItem = __webpack_require__(11);
+	
+	var _blistItem2 = _interopRequireDefault(_blistItem);
+	
+	var _blistItem3 = __webpack_require__(12);
+	
+	var _blistItem4 = _interopRequireDefault(_blistItem3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var blistItemComponent = {
+	    template: _blistItem2.default,
+	    controller: _blistItem4.default,
+	    controllerAs: 'blistItemCtrl'
+	};
+	
+	exports.default = blistItemComponent;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        YO.\n    </div>\n</div>\n"
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	function blistItemController() {
+	    var ctrl = this;
+	}
+	
+	exports.default = blistItemController;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _app = __webpack_require__(14);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(12);
+	var _app3 = __webpack_require__(15);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -32845,13 +32899,13 @@
 	exports.default = appComponent;
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-down\"></i>\n                    GroceryList\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4\">\n\n            <blist-page />\n<!-- name fo the file sans ext .html -->\n\n        </div>\n    </div>\n</div> <!-- END container -->"
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports) {
 
 	"use strict";
