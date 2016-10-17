@@ -32808,7 +32808,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-2\"></div>\n\n        <div class=\"col-md-8\">\n            \n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <div class=\"lead\">To Get</div>\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n            />\n        </div>\n\n        <div class=\"col-md-2\"></div>\n    </div>\n</div>"
+	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-2\"></div>\n\n        <div class=\"col-md-8\">\n            \n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <div class=\"lead\">To Get</div>\n            <hr>\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n            />\n        </div>\n\n        <div class=\"col-md-2\"></div>\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
@@ -32871,7 +32871,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"row\">\n\n        <div class=\"col-md-3\">\n            <button class=\"btn btn-default\"></button>&nbsp;\n            {{ blistItemCtrl.bitem.item_name }}\n        </div>\n        <div class=\"col-md-3\">\n            <!-- <div class=\"pull-right\"> -->\n                {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n            <!-- </div> -->\n        </div>\n\n"
+	module.exports = "\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"panel\">\n                {{ blistItemCtrl.bitem.item_name }}\n                <p>\n                    {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n                </p>\n\n                <div class=\"panel panel-controls\">\n                    <button class=\"btn btn-default\" \n                            type=\"submit\">\n                            Got\n                    </button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"col-md-3\"></div>\n        <div class=\"col-md-3\"></div>\n"
 
 /***/ },
 /* 12 */
