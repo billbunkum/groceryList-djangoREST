@@ -6,6 +6,7 @@ const blistItemComponent = {
     template: template,
     bindings: {
         bitem: '<',
+        remove: '&', //removes bitem from Got List
     },
 
     controller: blistItemController,

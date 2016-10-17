@@ -10,7 +10,7 @@ function blistPageController(blistAPIService, $interval) {
         });
     }
     getBitems();
-//    $interval(getBitems, 5000);
+    $interval(getBitems, 5000);
 
 //saving new Bitems on main page
     ctrl.saveBitem = function saveBitem(editedBitem) {
@@ -19,6 +19,17 @@ function blistPageController(blistAPIService, $interval) {
             ctrl.editedbitem = {};
         });
     };
+
+
+//NOT WORKING
+    ctrl.removeBitem = function removeBitem(editedBitem) {
+        blistAPIService.bitems.shift(editedBitem);
+    };
 }
+
+// remove bitem from Get List
+//    ctrl.removeBitem = function removeBitem() {
+//        blistAPIService.bitems.
+//    };
 
 export default blistPageController;
