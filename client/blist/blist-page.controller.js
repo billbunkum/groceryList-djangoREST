@@ -1,6 +1,7 @@
 
 function blistPageController(blistAPIService, $interval) {
     const ctrl = this;
+    ctrl.editedBitem = {};
 
     function getBitems() {
         blistAPIService.bitems.get().$promise.then( (data) => {
@@ -9,7 +10,15 @@ function blistPageController(blistAPIService, $interval) {
         });
     }
     getBitems();
-    // $interval(getBitems, 2000);
+//    $interval(getBitems, 5000);
+
+//saving new Bitems on main page
+    ctrl.saveBitem = function saveBitem(editedBitem) {
+        blistAPIService.bitems.save(editedBitem).$promise.then(
+            (bitemData) => { ctrl.bitems = [ bitemData, ...ctrl.bitems, ];
+            ctrl.editedbitem = {};
+        });
+    };
 }
 
 export default blistPageController;

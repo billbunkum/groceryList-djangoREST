@@ -1,0 +1,33 @@
+<!-- This will handle Adding, Editing, Cancelling
+-->
+
+<form ng-submit="blistEditCtrl.saveBitem()">
+    <div class="form-group">
+        <label>
+            Grocery Item
+        </label>
+
+
+        <input class="form-control" 
+                maxlength="30"
+                ng-model="blistEditCtrl.editedBitem.item_name"
+        >
+        </input>
+    </div>
+
+    <button type="submit" 
+            class="btn btn-info"
+            ng-disabled="!blistEditCtrl.editedBitem"
+    >
+        Add Item
+    </button>
+
+    <button type="submit" 
+            class="btn btn-info"
+            ng-show="blistEditCtrl.cancel"
+            ng-click="blistEditCtrl.cancel()" 
+    >
+        Cancel
+    </button>
+</form>
+

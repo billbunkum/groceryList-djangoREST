@@ -1,21 +1,10 @@
 
-    <div class="row">
+<div class="panel">
+    <button class="btn btn-default" 
+            type="submit">
+            Got it!
+    </button>
+    {{ blistItemCtrl.bitem.item_name }}
 
-        <div class="col-md-6">
-            <div class="panel">
-                {{ blistItemCtrl.bitem.item_name }}
-                <p>
-                    {{ blistItemCtrl.bitem.date_added | date:'medium' }}
-                </p>
-
-                <div class="panel panel-controls">
-                    <button class="btn btn-default" 
-                            type="submit">
-                            Got
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
+    {{ blistItemCtrl.bitem.date_added | date:'ss:mma' }}
+</div>

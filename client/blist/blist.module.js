@@ -3,6 +3,8 @@ import 'angular-resource';
 
 import blistPageComponent from './blist-page.component';
 import blistItemComponent from './blist-item.component';
+import blistEditComponent from './blist-edit.component';
+
 import blistAPIService from './blist-api.service';
 
 const BlistModule = angular.module('blist', [
@@ -12,6 +14,7 @@ const BlistModule = angular.module('blist', [
 })
     .factory('blistAPIService', blistAPIService)
     .component('blistPage', blistPageComponent) //t'blistPage becomes blist-page
-    .component('blistItem', blistItemComponent);
+    .component('blistItem', blistItemComponent)
+    .component('blistEdit', blistEditComponent);
 
 export default BlistModule;

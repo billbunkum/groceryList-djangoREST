@@ -1,9 +1,7 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
 
-        <div class="col-md-8">
-            
+        <div class="col-md-6">
             <div class="jumbotron">
                 <h2>Grocery List</h2>
                 <p class="lead">
@@ -11,14 +9,22 @@
                 </p>
             </div>
 
-            <div class="lead">To Get</div>
-            <hr>
+            <blist-edit 
+                bitem="blistPageCtrl.editedBitem"
+                save="blistPageCtrl.saveBitem(editedBitem)"
+            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->
+        </div>
+
+        <div class="col-md-6">
+            <div class="lead">
+                To Get
+            </div>
+
+            
             <blist-item 
                 ng-repeat="bitem in blistPageCtrl.bitems"
                 bitem="bitem"
             />
         </div>
-
-        <div class="col-md-2"></div>
     </div>
 </div>

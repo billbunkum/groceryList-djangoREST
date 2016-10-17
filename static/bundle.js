@@ -66,7 +66,7 @@
 	
 	var _blist2 = _interopRequireDefault(_blist);
 	
-	var _app = __webpack_require__(14);
+	var _app = __webpack_require__(17);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -31883,7 +31883,11 @@
 	
 	var _blistItem2 = _interopRequireDefault(_blistItem);
 	
-	var _blistApi = __webpack_require__(13);
+	var _blistEdit = __webpack_require__(13);
+	
+	var _blistEdit2 = _interopRequireDefault(_blistEdit);
+	
+	var _blistApi = __webpack_require__(16);
 	
 	var _blistApi2 = _interopRequireDefault(_blistApi);
 	
@@ -31892,7 +31896,7 @@
 	var BlistModule = _angular2.default.module('blist', ['ngResource']).config(function ($resourceProvider) {
 	    $resourceProvider.defaults.stripTrailingSlashes = false;
 	}).factory('blistAPIService', _blistApi2.default).component('blistPage', _blistPage2.default) //t'blistPage becomes blist-page
-	.component('blistItem', _blistItem2.default);
+	.component('blistItem', _blistItem2.default).component('blistEdit', _blistEdit2.default);
 	
 	exports.default = BlistModule;
 
@@ -32808,7 +32812,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-2\"></div>\n\n        <div class=\"col-md-8\">\n            \n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <div class=\"lead\">To Get</div>\n            <hr>\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n            />\n        </div>\n\n        <div class=\"col-md-2\"></div>\n    </div>\n</div>"
+	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <blist-edit \n                bitem=\"blistPageCtrl.editedBitem\"\n                save=\"blistPageCtrl.saveBitem(editedBitem)\"\n            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->\n        </div>\n\n        <div class=\"col-md-6\">\n            <div class=\"lead\">\n                To Get\n            </div>\n\n            \n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n            />\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
@@ -32820,8 +32824,11 @@
 	    value: true
 	});
 	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	function blistPageController(blistAPIService, $interval) {
 	    var ctrl = this;
+	    ctrl.editedBitem = {};
 	
 	    function getBitems() {
 	        blistAPIService.bitems.get().$promise.then(function (data) {
@@ -32830,7 +32837,15 @@
 	        });
 	    }
 	    getBitems();
-	    // $interval(getBitems, 2000);
+	    //    $interval(getBitems, 5000);
+	
+	    //saving new Bitems on main page
+	    ctrl.saveBitem = function saveBitem(editedBitem) {
+	        blistAPIService.bitems.save(editedBitem).$promise.then(function (bitemData) {
+	            ctrl.bitems = [bitemData].concat(_toConsumableArray(ctrl.bitems));
+	            ctrl.editedbitem = {};
+	        });
+	    };
 	}
 	
 	exports.default = blistPageController;
@@ -32871,7 +32886,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"panel\">\n                {{ blistItemCtrl.bitem.item_name }}\n                <p>\n                    {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n                </p>\n\n                <div class=\"panel panel-controls\">\n                    <button class=\"btn btn-default\" \n                            type=\"submit\">\n                            Got\n                    </button>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"col-md-3\"></div>\n        <div class=\"col-md-3\"></div>\n"
+	module.exports = "\n<div class=\"panel\">\n    <button class=\"btn btn-default\" \n            type=\"submit\">\n            Got it!\n    </button>\n    {{ blistItemCtrl.bitem.item_name }}\n\n    {{ blistItemCtrl.bitem.date_added | date:'ss:mma' }}\n</div>"
 
 /***/ },
 /* 12 */
@@ -32891,6 +32906,67 @@
 
 /***/ },
 /* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _blistEdit = __webpack_require__(14);
+	
+	var _blistEdit2 = _interopRequireDefault(_blistEdit);
+	
+	var _blistEdit3 = __webpack_require__(15);
+	
+	var _blistEdit4 = _interopRequireDefault(_blistEdit3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var blistEditComponent = {
+	    template: _blistEdit2.default,
+	    bindings: {
+	        save: '&', //expecting a function
+	        bitem: '<', //expecting a variable or object
+	        cancel: '&?' },
+	
+	    controller: _blistEdit4.default,
+	    controllerAs: "blistEditCtrl"
+	};
+	
+	exports.default = blistEditComponent;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<!-- This will handle Adding, Editing, Cancelling\n-->\n\n<form ng-submit=\"blistEditCtrl.saveBitem()\">\n    <div class=\"form-group\">\n        <label>\n            Grocery Item\n        </label>\n\n\n        <input class=\"form-control\" \n                maxlength=\"30\"\n                ng-model=\"blistEditCtrl.editedBitem.item_name\"\n        >\n        </input>\n    </div>\n\n    <button type=\"submit\" \n            class=\"btn btn-info\"\n            ng-disabled=\"!blistEditCtrl.editedBitem\"\n    >\n        Add Item\n    </button>\n\n    <button type=\"submit\" \n            class=\"btn btn-info\"\n            ng-show=\"blistEditCtrl.cancel\"\n            ng-click=\"blistEditCtrl.cancel()\" \n    >\n        Cancel\n    </button>\n</form>\n\n"
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	function blistEditController() {
+	    var ctrl = this;
+	    ctrl.editedBitem = {};
+	
+	    ctrl.saveBitem = function saveBitem() {
+	        ctrl.save({ editedBitem: ctrl.editedBitem });
+	        //mutate 'editedBitem' in NG w/in blist-item.html
+	    };
+	}
+	
+	exports.default = blistEditController;
+
+/***/ },
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32909,7 +32985,7 @@
 	exports.default = blistAPIService;
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32918,11 +32994,11 @@
 	    value: true
 	});
 	
-	var _app = __webpack_require__(15);
+	var _app = __webpack_require__(18);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _app3 = __webpack_require__(16);
+	var _app3 = __webpack_require__(19);
 	
 	var _app4 = _interopRequireDefault(_app3);
 	
@@ -32937,13 +33013,13 @@
 	exports.default = appComponent;
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-down\"></i>\n                    GroceryList\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4\">\n\n            <blist-page />\n<!-- name fo the file sans ext .html -->\n\n        </div>\n    </div>\n</div> <!-- END container -->"
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports) {
 
 	"use strict";
