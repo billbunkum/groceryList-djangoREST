@@ -13,11 +13,32 @@
                 bitem="blistPageCtrl.editedBitem"
                 save="blistPageCtrl.saveBitem(editedBitem)"
             /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->
+            
+            <div class="panel"
+                ng-show="blistPageCtrl.hasGotBitems"
+            >
+                <p class="lead">
+                    <h3>Already Got</h3>
+                </p>
+                <button class="btn btn-danger"
+                        type="submit"
+                        ng-click="blistPageCtrl.clearGotBitems()"
+                >
+                    Clear Got List
+                </button>
+                <div class="panel-body"
+                    ng-repeat="gotBitem in blistPageCtrl.gotBitems"
+                >
+                    {{ gotBitem.item_name }}
+                    {{ gotBitem.date_added | date: 'medium' }}
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-6">
             <div class="lead">
-                To Get
+                <h3>Still to Get</h3>
             </div>
 
             <blist-item 

@@ -32812,13 +32812,13 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <blist-edit \n                bitem=\"blistPageCtrl.editedBitem\"\n                save=\"blistPageCtrl.saveBitem(editedBitem)\"\n            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->\n        </div>\n\n        <div class=\"col-md-6\">\n            <div class=\"lead\">\n                To Get\n            </div>\n\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n                remove=\"blistPageCtrl.removeBitem(editedBitem)\"\n            />\n        </div>\n    </div>\n</div>"
+	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <blist-edit \n                bitem=\"blistPageCtrl.editedBitem\"\n                save=\"blistPageCtrl.saveBitem(editedBitem)\"\n            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->\n            \n            <div class=\"panel\"\n                ng-show=\"blistPageCtrl.hasGotBitems\"\n            >\n                <p class=\"lead\">\n                    <h3>Already Got</h3>\n                </p>\n                <button class=\"btn btn-danger\"\n                        type=\"submit\"\n                        ng-click=\"blistPageCtrl.clearGotBitems()\"\n                >\n                    Clear Got List\n                </button>\n                <div class=\"panel-body\"\n                    ng-repeat=\"gotBitem in blistPageCtrl.gotBitems\"\n                >\n                    {{ gotBitem.item_name }}\n                    {{ gotBitem.date_added | date: 'medium' }}\n                </div>\n            </div>\n\n        </div>\n\n        <div class=\"col-md-6\">\n            <div class=\"lead\">\n                <h3>Still to Get</h3>\n            </div>\n\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n                remove=\"blistPageCtrl.removeBitem(editedBitem)\"\n            />\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -32829,6 +32829,8 @@
 	function blistPageController(blistAPIService, $interval) {
 	    var ctrl = this;
 	    ctrl.editedBitem = {};
+	    ctrl.gotBitems = [];
+	    ctrl.hasGotBitems = false;
 	
 	    function getBitems() {
 	        blistAPIService.bitems.get().$promise.then(function (data) {
@@ -32847,10 +32849,26 @@
 	        });
 	    };
 	
-	    //NOT WORKING
+	    //adds editedBitem object to gotBitem array; removes item using API
 	    ctrl.removeBitem = function removeBitem(editedBitem) {
-	        console.log(editedBitem);
+	        ctrl.gotBitems.push(editedBitem);
+	        alert(editedBitem.item_name + ' removed.');
+	
+	        if (ctrl.gotBitems.length > 0) {
+	            ctrl.hasGotBitems = true;
+	        } else {
+	            ctrl.hasGotBitems = false;
+	        };
+	
 	        blistAPIService.bitems.delete(editedBitem).$promise.then(getBitems());
+	        // TESTING console.log(ctrl.gotBitems);
+	    };
+	
+	    // clears gotBitems array
+	    ctrl.clearGotBitems = function clearGotBitems() {
+	        ctrl.gotBitems = [];
+	        ctrl.hasGotBitems = false;
+	        alert('Got items cleared');
 	    };
 	}
 	

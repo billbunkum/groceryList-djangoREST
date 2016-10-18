@@ -2,6 +2,9 @@
 function blistPageController(blistAPIService, $interval) {
     const ctrl = this;
     ctrl.editedBitem = {};
+    ctrl.gotBitems = [];
+    ctrl.hasGotBitems = false;
+
 
     function getBitems() {
         blistAPIService.bitems.get().$promise.then( (data) => {
@@ -20,11 +23,26 @@ function blistPageController(blistAPIService, $interval) {
         });
     };
 
-
-//NOT WORKING
+//adds editedBitem object to gotBitem array; removes item using API
     ctrl.removeBitem = function removeBitem(editedBitem) {
-        console.log(editedBitem);
+        ctrl.gotBitems.push(editedBitem);
+        alert(editedBitem.item_name + ' removed.');
+
+        if (ctrl.gotBitems.length > 0) {
+            ctrl.hasGotBitems = true;
+        } else {
+            ctrl.hasGotBitems = false;
+        };
+
         blistAPIService.bitems.delete(editedBitem).$promise.then(getBitems());
+// TESTING console.log(ctrl.gotBitems);
+    };
+
+// clears gotBitems array
+    ctrl.clearGotBitems = function clearGotBitems() {
+        ctrl.gotBitems = [];
+        ctrl.hasGotBitems = false;
+        alert('Got items cleared');
     };
 }
 
