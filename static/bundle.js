@@ -32812,7 +32812,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <blist-edit \n                bitem=\"blistPageCtrl.editedBitem\"\n                save=\"blistPageCtrl.saveBitem(editedBitem)\"\n                remove=\"blistItemCtrl.removeBitem(editedBitem)\"\n            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->\n        </div>\n\n        <div class=\"col-md-6\">\n            <div class=\"lead\">\n                To Get\n            </div>\n\n            \n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n            />\n        </div>\n    </div>\n</div>"
+	module.exports = "<div class=\"container\">\n    <div class=\"row\">\n\n        <div class=\"col-md-6\">\n            <div class=\"jumbotron\">\n                <h2>Grocery List</h2>\n                <p class=\"lead\">\n                    Wuddya want from the store?\n                </p>\n            </div>\n\n            <blist-edit \n                bitem=\"blistPageCtrl.editedBitem\"\n                save=\"blistPageCtrl.saveBitem(editedBitem)\"\n            /> <!-- this saveBitem refers to the saveBitem() in page-controller, not edit-controller; it is the same as the 'save' binding in the edit-component-->\n        </div>\n\n        <div class=\"col-md-6\">\n            <div class=\"lead\">\n                To Get\n            </div>\n\n            <blist-item \n                ng-repeat=\"bitem in blistPageCtrl.bitems\"\n                bitem=\"bitem\"\n                remove=\"blistPageCtrl.removeBitem(editedBitem)\"\n            />\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
@@ -32849,7 +32849,8 @@
 	
 	    //NOT WORKING
 	    ctrl.removeBitem = function removeBitem(editedBitem) {
-	        blistAPIService.bitems.shift(editedBitem);
+	        console.log(editedBitem);
+	        blistAPIService.bitems.delete(editedBitem).$promise.then(getBitems());
 	    };
 	}
 	
@@ -32896,7 +32897,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"panel\">\n    <button class=\"btn btn-default\" \n            type=\"submit\"\n            ng-click=\"blistItemCtrl.removeBitem()\"\n    >\n            Got it!\n    </button>\n    {{ blistItemCtrl.bitem.item_name }}\n\n    {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n</div>"
+	module.exports = "\n<div class=\"panel\">\n    <button class=\"btn btn-default\" \n            type=\"submit\"\n            ng-click=\"blistItemCtrl.remove({ 'editedBitem': blistItemCtrl.bitem })\"\n    >\n            Got it!\n    </button>\n    {{ blistItemCtrl.bitem.item_name }}\n\n    {{ blistItemCtrl.bitem.date_added | date:'medium' }}\n</div>"
 
 /***/ },
 /* 12 */
@@ -41831,7 +41832,7 @@
 	});
 	function blistAPIService($resource) {
 	    var api = {
-	        bitems: $resource('/api/groceryList/')
+	        bitems: $resource('/api/groceryList/:id/', { id: '@id' })
 	    };
 	
 	    return api;

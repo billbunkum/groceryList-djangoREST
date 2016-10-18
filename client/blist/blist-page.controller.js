@@ -23,7 +23,8 @@ function blistPageController(blistAPIService, $interval) {
 
 //NOT WORKING
     ctrl.removeBitem = function removeBitem(editedBitem) {
-        blistAPIService.bitems.shift(editedBitem);
+        console.log(editedBitem);
+        blistAPIService.bitems.delete(editedBitem).$promise.then(getBitems());
     };
 }
 

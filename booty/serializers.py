@@ -5,5 +5,5 @@ from .models import GroceryList
 class GroceryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroceryList
-        fields = ('item_name', 'item_price', 'date_added', 'total_price', )
+        fields = ('item_name', 'item_price', 'date_added', 'total_price', 'id', )
         read_only_fields = ('item_price', 'date_added', )
