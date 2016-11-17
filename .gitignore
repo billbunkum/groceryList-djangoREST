@@ -1,6 +1,8 @@
 *.pyc
 *.sqlite3
 __pycache__
+myvenv
+settings/local.py
 
 node_modules/
 npm-debug.log
