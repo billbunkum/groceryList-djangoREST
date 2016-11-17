@@ -1,7 +1,12 @@
-# DJANGO SEED
+# Grocery List
 
-##Grocery List using REST + Angular
-.new project
++ Uses DjangoREST & Angular
++ persists data onto a django back-end
++ keeps track of items which have been 'got'
++ deployed on Heroku
++ uses a 'djangoSEED' which includes webpack, gulp
 
-1. get api working
-2. add angular
+# Using
++ $ pip install -r requirements.txt
++ $ ./manage.py runserver
++ $ npm start
