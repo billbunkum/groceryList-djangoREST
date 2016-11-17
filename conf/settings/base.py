@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).ancestor(3)
 TEMPLATE_DIR = BASE_DIR.child("templates")
 STATIC_FILE_DIR = BASE_DIR.child("static")
 
-
+LOGIN_REDIRECT_URL = '/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -89,7 +89,7 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
